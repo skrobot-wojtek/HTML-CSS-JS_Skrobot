@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8"/>
+    <link href='http://fonts.googleapis.com/css?family=Lato|Josefin+Sans&subset=latin-ex' rel='stylesheet'
+          type='text/css'>
+    <title>HTML+CSS+JS Promo Skrobot</title>
+
+</head>
+<body>
+
+<!-- Główny html -->
+
+<div id="container">
+
+
+    <div class="section">
+        <button id="button1"> Click Me to show text</button>
+        <textarea id="textarea1" placeholder="Tutaj pojawi się text"></textarea>
+    </div>
+    <div class="section">
+        <button id="button2"> Click Me to show text below</button>
+        <p id="textarea2">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+            printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five
+            centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was
+            popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
+            recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    </div>
+    <div class="section">
+        <div id="wraper"><textarea id="writetextarea3" placeholder="Tutaj wpisz swój text"></textarea>
+            <button id="button3" placeholder="Tutaj pojawi się text">Skopiuj text !</button>
+        </div>
+        <textarea id="pastetextarea3" placeholder="Tutaj wklej skopiowany text"></textarea>
+    </div>
+
+</div>
+
+<!--style CSS-->
+
+
+<style>
+    body {
+        background-color: #fecc00;
+        color: #ffffff;
+        font-family: 'Lato', sans-serif;
+        font-size: 20px;
+    }
+
+    textarea {
+        resize: none;
+    }
+
+    #container {
+        width: 75%;
+        margin: auto;
+        background-color: #fafafa;
+        border-radius: 5px;
+        padding: 30px;
+    }
+
+    .section {
+        width: 75%;
+
+        padding: 10px;
+        margin: 20px auto 20px;
+        background-color: #fecc00;
+        border-radius: 5px;
+        border: solid 2px #ad8c14;
+    }
+
+    .section:first-child button {
+        width: 80%;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .section:first-child textarea {
+        width: 80%;
+        height: 100px;
+        border-radius: 5px;
+        display: block;
+        margin: 10px auto;
+    }
+
+    .section:nth-child(2) button {
+        width: 80%;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .section:nth-child(2) p {
+        width: 80%;
+        margin: 0 auto;
+        display: none;
+        color: black;
+        font-size: 20px;
+        padding: 30px;
+    }
+
+    .section:nth-child(3) #wraper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .section:nth-child(3) #writetextarea3 {
+        width: 60%;
+        border-radius: 5px;
+        margin-right: 5%;
+    }
+
+    .section:nth-child(3) #button3 {
+        width: 15%;
+        border-radius: 5px;
+    }
+
+    .section:nth-child(3) #pastetextarea3 {
+        width: 80%;
+        border-radius: 5px;
+        display: block;
+        margin: 2% 10%;
+    }
+
+</style>
+
+// <!-- JS Script-->
+
+
+<script>
+    // Pierwszy DIV - pierwsza wersja uzywania buttonu jako trigera czsegoś
+
+    document.getElementById("button1").addEventListener("click", function () {
+        let textarea1 = document.getElementById("textarea1");
+        if (textarea1.value === "") {
+            textarea1.value = "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+            document.getElementById("button1").innerHTML = "Click Me to hide text";
+        } else {
+            textarea1.value = "";
+            document.getElementById("button1").innerHTML = "Click Me to show text";
+        }
+    });
+    // koniec funkcji dla pierwszego DIV-a
+
+
+    //  Drugi DIV -  wersja używająca buttonu jako trigera czsegoś ale już z on click-em
+
+    let isTextarea2Visible = false;
+
+    let functionshowtextarea2 = function () {
+        if (isTextarea2Visible) {
+            document.getElementById("textarea2").style.display = "none";
+            button2.innerHTML = "Click Me to show text below";
+        } else {
+            document.getElementById("textarea2").style.display = "block";
+            button2.innerHTML = "Click Me to hide text below";
+        }
+        isTextarea2Visible = !isTextarea2Visible;
+    };
+
+    document.getElementById("button2").addEventListener("click", functionshowtextarea2);
+
+    // koniec funkcji dla drugiego DIV-a
+
+    //  Trzeci DIV -  wersja używająca buttonu jako trigera do kopiowania zawartości z pola textarea3 do schowka
+
+    let copyText = function () {
+        let input = document.getElementById("writetextarea3");
+        input.select();
+        input.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        alert("Skopiowano tekst do schowka!");
+    }
+    document.getElementById("button3").addEventListener("click", copyText);
+
+    // koniec funkcji dla trzeciego DIV-a
+
+</script>
+</body>
+</html>
